@@ -1,18 +1,18 @@
 package com.tradeapp.service;
 
 import com.tradeapp.constants.TradeConstants;
-import com.tradeapp.entity.Trade;
 import com.tradeapp.dao.TradeDao;
 import com.tradeapp.dto.TradeDTO;
+import com.tradeapp.entity.Trade;
 import com.tradeapp.exception.TradeException;
 import com.tradeapp.mapper.TradeMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAccessor;
 import java.util.Optional;
 
 @Service
@@ -22,6 +22,7 @@ public class TradeServiceImpl implements TradeService {
     public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(TradeConstants.CREATE_DATE_FORMAT);
     private TradeDao tradeDao;
 
+    @Autowired
     public TradeServiceImpl(TradeDao tradeDao) {
         this.tradeDao = tradeDao;
     }
@@ -56,14 +57,13 @@ public class TradeServiceImpl implements TradeService {
 
         // Set created Date to current date if input created date is null or blank
         if (ObjectUtils.isEmpty(trade.getCreatedDate())) {
-            trade.setCreatedDate(DATE_FORMATTER.format(LocalDate.now()));
+            trade.setCreatedDate(LocalDate.now());
         }
 
-        LocalDate maturityDate = LocalDate.parse(trade.getMaturityDate(), DATE_FORMATTER);
         LocalDate currentDate = LocalDate.now();
 
         // set expired to "N" if maturity date is older than current date
-        if (maturityDate.compareTo(currentDate) < 0) {
+        if (trade.getMaturityDate().compareTo(currentDate) < 0) {
             trade.setExpired("Y");
         } else {
             trade.setExpired("N");
@@ -71,9 +71,8 @@ public class TradeServiceImpl implements TradeService {
         return tradeDao.save(trade);
     }
 
-    private boolean isOldMaturityDate(String maturityDate) {
-        LocalDate localDate = LocalDate.parse(maturityDate, DATE_FORMATTER);
+    private boolean isOldMaturityDate(LocalDate maturityDate) {
         LocalDate currentDate = LocalDate.now();
-        return localDate.compareTo(currentDate) < 0;
+        return maturityDate.compareTo(currentDate) < 0;
     }
 }

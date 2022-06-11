@@ -1,12 +1,13 @@
 package com.tradeapp.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 
 @Data
 @Builder
@@ -18,6 +19,11 @@ public class TradeDTO {
     private Integer version;
     private String counterPartyId;
     private String bookId;
-    private String maturityDate;
-    private String createdDate;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+    private LocalDate maturityDate;
+
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+    private LocalDate createdDate;
 }

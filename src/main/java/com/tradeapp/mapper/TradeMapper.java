@@ -4,6 +4,8 @@ import com.tradeapp.entity.Trade;
 import com.tradeapp.dto.TradeDTO;
 import lombok.experimental.UtilityClass;
 
+import java.time.LocalDate;
+
 @UtilityClass
 public class TradeMapper {
 
