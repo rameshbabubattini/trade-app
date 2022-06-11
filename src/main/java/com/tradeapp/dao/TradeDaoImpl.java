@@ -1,8 +1,11 @@
 package com.tradeapp.dao;
 
-import com.tradeapp.bean.Trade;
+import com.tradeapp.entity.Trade;
 import com.tradeapp.repository.TradeRepository;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class TradeDaoImpl implements TradeDao {
@@ -24,7 +27,12 @@ public class TradeDaoImpl implements TradeDao {
     }
 
     @Override
-    public void get(String tradeId) {
-        tradeRepository.getReferenceById(tradeId);
+    public Optional<Trade> findById(String tradeId) {
+        return tradeRepository.findById(tradeId);
+    }
+
+    @Override
+    public List<Trade> findAllExpiredTrades() {
+        return tradeRepository.findAllExpiredTrades();
     }
 }

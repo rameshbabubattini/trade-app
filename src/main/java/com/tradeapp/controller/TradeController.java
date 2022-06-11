@@ -19,7 +19,7 @@ public class TradeController {
         this.tradeService = tradeService;
     }
 
-    @PostMapping(value = "/sendTrade", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/sendTrade", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.TEXT_PLAIN_VALUE)
     public ResponseEntity<String> sendTrade(@RequestBody TradeDTO tradeDTO) {
         log.info("Trade received: {}", tradeDTO);
         tradeService.processTrade(tradeDTO);

@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 public class TradeDTO {
     @NotEmpty
     private String tradeId;
-    private String version;
+    private Integer version;
     private String counterPartyId;
     private String bookId;
     private String maturityDate;

@@ -1,6 +1,6 @@
 package com.tradeapp.mapper;
 
-import com.tradeapp.bean.Trade;
+import com.tradeapp.entity.Trade;
 import com.tradeapp.dto.TradeDTO;
 import lombok.experimental.UtilityClass;
 
@@ -12,6 +12,7 @@ public class TradeMapper {
                 .tradeId(tradeDTO.getTradeId())
                 .version(tradeDTO.getVersion())
                 .counterPartyId(tradeDTO.getCounterPartyId())
+                .bookId(tradeDTO.getBookId())
                 .maturityDate(tradeDTO.getMaturityDate())
                 .createdDate(tradeDTO.getCreatedDate())
                 .build();
