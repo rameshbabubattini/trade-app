@@ -20,8 +20,7 @@ public class ScheduledJob {
      * Job to update expired flag to N if the maturity date is crossed.
      * Running this job Daily once would be enough
      */
-    @Scheduled(cron = "0/30 * * * * *")
-//    @Scheduled(cron = "* * 0 * * *")
+    @Scheduled(cron = "${cron.expression}")
     public void updateExpiredStatus() {
         log.info("Executing schedule for updateExpiredStatus.. ");
         Collection<Trade> allExpiredTrades = tradeDao.findAllExpiringTrades();

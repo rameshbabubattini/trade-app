@@ -19,7 +19,7 @@ import java.util.Optional;
 @Slf4j
 public class TradeServiceImpl implements TradeService {
 
-    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(TradeConstants.CREATE_DATE_FORMAT);
+    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(TradeConstants.DATE_FORMAT);
     private TradeDao tradeDao;
 
     @Autowired

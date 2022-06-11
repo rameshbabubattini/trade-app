@@ -14,9 +14,11 @@ spring:
     hibernate:
       ddl-auto: create
     show-sql: true
+    defer-datasource-initialization: true
   h2:
     console:
       enabled: true
 
+
 cron:
-  expression: "0/30 * * * * *"
+  expression: "* * 5 * * *"
